@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Rider\\MaterialManagement\\MaterialManagement\\MaterialManagement.csproj",
+      "projectUniqueName": "C:\\Users\\Sven\\Documents\\GitHub\\MaterialManagement\\MaterialManagement\\MaterialManagement\\MaterialManagement.csproj",
       "projectName": "MaterialManagement",
-      "projectPath": "C:\\Rider\\MaterialManagement\\MaterialManagement\\MaterialManagement.csproj",
+      "projectPath": "C:\\Users\\Sven\\Documents\\GitHub\\MaterialManagement\\MaterialManagement\\MaterialManagement\\MaterialManagement.csproj",
       "packagesPath": "C:\\Users\\Sven\\.nuget\\packages\\",
-      "outputPath": "C:\\Rider\\MaterialManagement\\MaterialManagement\\obj\\",
+      "outputPath": "C:\\Users\\Sven\\Documents\\GitHub\\MaterialManagement\\MaterialManagement\\MaterialManagement\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
