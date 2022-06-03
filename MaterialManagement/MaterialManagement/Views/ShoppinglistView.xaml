@@ -1,0 +1,40 @@
+﻿<Window x:Class="MaterialManagement.Views.ShoppinglistView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:MaterialManagement.Views"
+        mc:Ignorable="d"
+        Title="ShoppinglistView" Height="450" Width="800">
+    <Grid Margin="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" FontSize="25" Margin="10" Content="Materialmanagement"></Label>
+        <Button Grid.Row="0" Grid.Column="1" Height="30" Width="120" HorizontalAlignment="Right" Margin="40,0" Content="Material"></Button>
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+                <Label Content="Material hinzufügen:" Margin="0,0,10,0"></Label>
+                <TextBox Width="300"></TextBox>
+            </StackPanel>
+            <Grid Grid.Row="1" Margin="30,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" FontSize="15" Content="Einkaufsliste:"></Label>
+                <ListBox Grid.Row="1"></ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
