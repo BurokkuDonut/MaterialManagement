@@ -4,31 +4,35 @@ using Caliburn.Micro;
 
 namespace MaterialManagement.ViewModels
 {
-    public class ShellViewModel : Conductor<Screen>.Collection.OneActive, IScreen
+    public class ShellViewModel : Conductor<Screen>.Collection.OneActive, IHandle<NavigationEvent>
     {
+        private readonly EventAggregator _eventAggregator;
 
         public ShellViewModel()
         {
+            _eventAggregator = new EventAggregator();
+            _eventAggregator.SubscribeOnPublishedThread(this);
             LoadDefault();
         }
 
         public void LoadDefault()
         {
-            ActivateItemAsync(new MaterialViewModel(this));
-            NotifyOfPropertyChange(null);
+            ActivateItemAsync(new MaterialViewModel(_eventAggregator));
         }
 
-        public void NavigateToShoppinglistView(MaterialViewModel materialViewModel)
+        public Task HandleAsync(NavigationEvent message, CancellationToken cancellationToken)
         {
-            DeactivateItemAsync(materialViewModel, true, CancellationToken.None);
-            ActivateItemAsync(new ShoppinglistViewModel(this));
-        }
+            switch (message.NavigateTo)
+            {
+                case "MaterialViewModel":
+                    ActivateItemAsync(new MaterialViewModel(_eventAggregator));
+                    break;
+                case "ShoppinglistViewModel":
+                    ActivateItemAsync(new ShoppinglistViewModel(_eventAggregator));
+                    break;
+            }
 
-        public void LoadMaterialManagementView(ShoppinglistViewModel shoppinglistViewModel)
-        {
-            DeactivateItemAsync(shoppinglistViewModel, true, CancellationToken.None);
-            ActivateItemAsync(new MaterialViewModel(this));
+            return Task.CompletedTask;
         }
-        
     }
 }

@@ -101,3 +101,4 @@ C:\Users\Sven\Documents\GitHub\MaterialManagement\MaterialManagement\MaterialMan
 C:\Users\Sven\Documents\GitHub\MaterialManagement\MaterialManagement\MaterialManagement\obj\Debug\net5.0-windows\MaterialManagement.csproj.CopyComplete
 C:\Users\Sven\Documents\GitHub\MaterialManagement\MaterialManagement\MaterialManagement\obj\Debug\net5.0-windows\Views\ShellView.g.cs
 C:\Users\Sven\Documents\GitHub\MaterialManagement\MaterialManagement\MaterialManagement\obj\Debug\net5.0-windows\Views\ShellView.baml
+C:\Users\Sven\Documents\GitHub\MaterialManagement\MaterialManagement\MaterialManagement\bin\Debug\net5.0-windows\CsvHelper.dll

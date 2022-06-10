@@ -47,6 +47,10 @@
             "Caliburn.Micro": {
               "target": "Package",
               "version": "[4.0.173, )"
+            },
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[27.2.1, )"
             }
           },
           "imports": [

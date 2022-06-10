@@ -15,6 +15,6 @@ namespace MaterialManagement
         {
             DisplayRootViewFor<ShellViewModel>();
         }
-        
+       
     }
 }

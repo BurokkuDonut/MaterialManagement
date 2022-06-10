@@ -4,16 +4,16 @@ namespace MaterialManagement.ViewModels
 {
     public class ShoppinglistViewModel : Screen
     {
-        private readonly ShellViewModel _shellViewModel;
+        private readonly EventAggregator _eventAggregator;
 
-        public ShoppinglistViewModel(ShellViewModel shellViewModel)
+        public ShoppinglistViewModel(EventAggregator eventAggregator)
         {
-            _shellViewModel = shellViewModel;
+            _eventAggregator = eventAggregator;
         }
 
         public void NavigateToMaterialManagementView()
         {
-            _shellViewModel.LoadMaterialManagementView(this);
+            _eventAggregator.PublishOnCurrentThreadAsync(new NavigationEvent(typeof(MaterialViewModel)));
         }
     }
 }

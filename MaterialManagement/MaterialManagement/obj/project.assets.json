@@ -30,6 +30,15 @@
           "lib/netstandard2.0/Caliburn.Micro.Core.dll": {}
         }
       },
+      "CsvHelper/27.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/CsvHelper.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/CsvHelper.dll": {}
+        }
+      },
       "Microsoft.NETCore.Platforms/5.0.0": {
         "type": "package",
         "compile": {
@@ -1122,6 +1131,30 @@
         "lib/netstandard2.0/Caliburn.Micro.Core.dll",
         "lib/netstandard2.0/Caliburn.Micro.Core.pdb",
         "lib/netstandard2.0/Caliburn.Micro.Core.xml"
+      ]
+    },
+    "CsvHelper/27.2.1": {
+      "sha512": "uS5ix5hL9gL5taiAG//CScyJa8Fn1ZOh3FDhDvf4laboESFs84mCNropfp7PIt8xCkyQofljFpqu1B5UnSXjyA==",
+      "type": "package",
+      "path": "csvhelper/27.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "csvhelper.27.2.1.nupkg.sha512",
+        "csvhelper.nuspec",
+        "lib/net45/CsvHelper.dll",
+        "lib/net45/CsvHelper.xml",
+        "lib/net47/CsvHelper.dll",
+        "lib/net47/CsvHelper.xml",
+        "lib/net5.0/CsvHelper.dll",
+        "lib/net5.0/CsvHelper.xml",
+        "lib/net6.0/CsvHelper.dll",
+        "lib/net6.0/CsvHelper.xml",
+        "lib/netstandard2.0/CsvHelper.dll",
+        "lib/netstandard2.0/CsvHelper.xml",
+        "lib/netstandard2.1/CsvHelper.dll",
+        "lib/netstandard2.1/CsvHelper.xml"
       ]
     },
     "Microsoft.NETCore.Platforms/5.0.0": {
@@ -3809,7 +3842,8 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
-      "Caliburn.Micro >= 4.0.173"
+      "Caliburn.Micro >= 4.0.173",
+      "CsvHelper >= 27.2.1"
     ]
   },
   "packageFolders": {
@@ -3859,6 +3893,10 @@
           "Caliburn.Micro": {
             "target": "Package",
             "version": "[4.0.173, )"
+          },
+          "CsvHelper": {
+            "target": "Package",
+            "version": "[27.2.1, )"
           }
         },
         "imports": [

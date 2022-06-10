@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "yuvYTiW7kkuHYvj6Kb50GyuW2cGLlxH1rKjmqO/fVzBDV5mBNGJH/G+1WkQwPob38mnaE4ry92DeONMCT3FQNg==",
+  "dgSpecHash": "9c+FnXZ9D14jGxk5RY01kW/hDuCSHOxxmyr+E9sN1VfT8iSH4XEUvCJWts+3Ho6G/7MeEVCq86tgm4qPRZFefg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Sven\\Documents\\GitHub\\MaterialManagement\\MaterialManagement\\MaterialManagement\\MaterialManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Sven\\.nuget\\packages\\caliburn.micro\\4.0.173\\caliburn.micro.4.0.173.nupkg.sha512",
     "C:\\Users\\Sven\\.nuget\\packages\\caliburn.micro.core\\4.0.173\\caliburn.micro.core.4.0.173.nupkg.sha512",
+    "C:\\Users\\Sven\\.nuget\\packages\\csvhelper\\27.2.1\\csvhelper.27.2.1.nupkg.sha512",
     "C:\\Users\\Sven\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\Sven\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Sven\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
