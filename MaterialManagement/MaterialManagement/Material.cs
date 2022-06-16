@@ -1,9 +1,11 @@
-﻿using System.Threading;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using CsvHelper.Configuration.Attributes;
 
 namespace MaterialManagement
 {
-    public class Material
+    public class Material : INotifyPropertyChanged
     {
         static int nextId;
 
@@ -29,6 +31,19 @@ namespace MaterialManagement
         [Name("MinimalCount")]
         public int MinimalCount { get; set; }
         [Name("ToBeOrdered")]
-        public int ToBeOrdered { get; set; }
+        public int ToBeOrdered 
+        {   get=>toBeOrdered;
+            set { toBeOrdered = value;
+                OnPropertyChanged(nameof(ToBeOrdered));} 
+        }
+
+        private int toBeOrdered { get; set; }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

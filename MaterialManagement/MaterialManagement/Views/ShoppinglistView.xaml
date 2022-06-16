@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:viewModels="clr-namespace:MaterialManagement.ViewModels"
+        xmlns:cm="http://caliburnmicro.com"
         mc:Ignorable="d"
         Height="550" Width="800"
         d:DataContext="{d:DesignInstance viewModels:ShoppinglistViewModel}">
@@ -48,7 +49,8 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
                 <Label Content="Material hinzufügen:" Margin="0,0,10,0"></Label>
-                <TextBox Width="300" Height="25" VerticalContentAlignment="Center"></TextBox>
+                <TextBox x:Name="ShoppingListTextBox" Width="300" Height="25" VerticalContentAlignment="Center" cm:Message.Attach="[Event KeyDown] = [Action AddToShoppingList($executionContext)]">
+                </TextBox>
             </StackPanel>
             <Grid Grid.Row="1" Margin="30,10">
                 <Grid.RowDefinitions>
@@ -56,7 +58,28 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" FontSize="15" Content="Einkaufsliste:"></Label>
-                <ListBox Grid.Row="1"></ListBox>
+                <ListView Grid.Row="1" ItemsSource="{Binding Material}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Menge" DisplayMemberBinding="{Binding ToBeOrdered}" />
+                            <GridViewColumn Header="Hinzufügen">
+                                <GridViewColumn.CellTemplate>
+                                    <ItemContainerTemplate>
+                                        <Button cm:Message.Attach="[Action Add($this)]">+</Button>
+                                    </ItemContainerTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>                        
+                            <GridViewColumn Header="Entfernen">
+                                <GridViewColumn.CellTemplate>
+                                    <ItemContainerTemplate>
+                                        <Button cm:Message.Attach="[Action Remove($this)]">-</Button>
+                                    </ItemContainerTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </Grid>
     </Grid>
