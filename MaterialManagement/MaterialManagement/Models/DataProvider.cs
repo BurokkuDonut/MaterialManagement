@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MaterialManagement.Models
 {
@@ -19,18 +20,18 @@ namespace MaterialManagement.Models
             return allLines;
         }
 
-        public void AddMaterial(Material material)
+        public Task AddMaterial(Material material)
         {
             string line = String.Join(',', material.Id, material.Name, material.Count, material.MinimalCount,
                 material.ToBeOrdered);
-            _csvReadWriter.WriteAsync(material);
+            return _csvReadWriter.WriteAsync(material);
         }
 
-        public void EditMaterial(Material material)
+        public Task EditMaterial(Material material)
         {
             string line = String.Join(',', material.Id, material.Name, material.Count, material.MinimalCount,
                 material.ToBeOrdered);
-            _csvReadWriter.WriteByIdAsync(material);
+            return _csvReadWriter.WriteByIdAsync(material);
         }
     }
 }
