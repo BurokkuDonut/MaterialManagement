@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MaterialManagement.Models
 {
     public interface IDataProvider
     {
         List<Material> GetMaterials();
-        void AddMaterial(Material material);
-        void EditMaterial(Material material);
+        Task AddMaterial(Material material);
+        Task EditMaterial(Material material);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using MaterialManagement.Models;
 
@@ -10,7 +12,7 @@ namespace MaterialManagement.ViewModels
         private readonly IDataProvider _dataProvider;
         private readonly EventAggregator _eventAggregator;
         private string _amount;
-        private List<Material> _materials;
+        private ObservableCollection<Material> _materials;
         private string _minimalAmount;
         private string _name;
         private int _selectedMaterialIndex;
@@ -19,11 +21,11 @@ namespace MaterialManagement.ViewModels
         {
             _eventAggregator = eventAggregator;
             _dataProvider = new DataProvider();
-            Materials = _dataProvider.GetMaterials();
+            Materials = new ObservableCollection<Material>(_dataProvider.GetMaterials());
             SelectedMaterialIndex = -1;
         }
 
-        public List<Material> Materials
+        public ObservableCollection<Material> Materials
         {
             get => _materials;
             set => _materials = value;
@@ -45,7 +47,7 @@ namespace MaterialManagement.ViewModels
             set
             {
                 _name = value;
-                NotifyOfPropertyChange(nameof(Name));
+                NotifyOfPropertyChange(() => Name);
             }
         }
 
@@ -55,7 +57,7 @@ namespace MaterialManagement.ViewModels
             set
             {
                 _amount = value;
-                NotifyOfPropertyChange(nameof(Amount));
+                NotifyOfPropertyChange(() => Amount);
             }
         }
 
@@ -85,13 +87,25 @@ namespace MaterialManagement.ViewModels
 
         public void AddToCount()
         {
-            Materials[_selectedMaterialIndex].Count += 1;
+            Amount = (Convert.ToInt32(Amount) + 1).ToString();
             NotifyOfPropertyChange(() => Amount);
         }
 
         public void RemoveFromCount()
         {
-            Materials[_selectedMaterialIndex].Count -= 1;
+            Amount = (Convert.ToInt32(Amount) - 1).ToString();
+            NotifyOfPropertyChange(() => Amount);
+        }
+
+        public void AddToMinimal()
+        {
+            MinimalAmount = (Convert.ToInt32(Amount) + 1).ToString();
+            NotifyOfPropertyChange(() => Amount);
+        }
+
+        public void RemoveFromMinimal()
+        {
+            MinimalAmount = (Convert.ToInt32(Amount) - 1).ToString();
             NotifyOfPropertyChange(() => Amount);
         }
 
@@ -107,15 +121,15 @@ namespace MaterialManagement.ViewModels
         {
             if (SelectedMaterialIndex < 0)
             {
-                _dataProvider.AddMaterial(
-                    new Material(Name, Convert.ToInt32(Amount), Convert.ToInt32(MinimalAmount), 0));
+                Task.Run(() => _dataProvider.AddMaterial(
+                    new Material(Name, Convert.ToInt32(Amount), Convert.ToInt32(MinimalAmount), 0)));
             }
             else
             {
                 Materials[SelectedMaterialIndex].Count = int.Parse(Amount);
                 Materials[SelectedMaterialIndex].Name = Name;
                 Materials[SelectedMaterialIndex].MinimalCount = int.Parse(MinimalAmount);
-                _dataProvider.EditMaterial(Materials[SelectedMaterialIndex]);
+                Task.Run(() => _dataProvider.EditMaterial(Materials[SelectedMaterialIndex]));
             }
         }
     }
