@@ -1,55 +1,81 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CsvHelper;
+using CsvHelper.Configuration;
+using MaterialManagement.ViewModels;
 
 namespace MaterialManagement.Models
 {
     public class CsvReadWriter : ICsvReadWriter
     {
-        public string Path { get; set; }
+        public string MaterialPath { get; set; } = Path.Combine(Environment.CurrentDirectory, "Data.csv");
 
-        public Task WriteAsync(string line)
+        public Task WriteAsync(Material line)
         {
-            using (var writer = new StreamWriter(Path, true))
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                if (!File.Exists(Path))
-                {
-                    ;
-                    File.Create(Path);
-                }
+                HasHeaderRecord = false,
+            };
 
-                writer.WriteLineAsync(line);
-
-                return Task.CompletedTask;
+            using (var stream = File.Open(MaterialPath, FileMode.Append))
+            using (var writer = new StreamWriter(stream))
+            using (var csv = new CsvWriter(writer, config))
+            {
+                csv.WriteRecord(line);
+                csv.NextRecord();
             }
+
+            return Task.CompletedTask;
+        }
+
+        public Task<List<Material>> ReadAllAsync()
+        {
+            if (!File.Exists(MaterialPath))
+            {
+                using (var stream = File.Open(MaterialPath, FileMode.Create))
+                {
+                    using (var writer = new StreamWriter(stream))
+                    {
+                        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                        {
+                            csv.WriteHeader<Material>();
+                            csv.NextRecord();
+                        }
+                    }
+                }
+            }
+
+            List<Material> materials;
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = true,
+            };
+            using (var reader = new StreamReader(MaterialPath))
+            {
+                using (var csv = new CsvReader(reader, config))
+                {
+                    csv.Context.RegisterClassMap<MaterialMap>();
+                    materials = csv.GetRecords<Material>().ToList();
+                }
+            }
+
+            return Task.FromResult(materials);
         }
 
 
-        public async Task<List<string>> ReadAllAsync()
+        public Task WriteByIdAsync(Material material)
         {
-            using (var reader = new StreamReader(Path))
-            {
-                var stringList = new List<string>();
-                while (!reader.EndOfStream)
-                {
-                    stringList.Add(await reader.ReadLineAsync().ConfigureAwait(false));
-                }
-
-                return stringList;
-            }
-        }
-
-
-        public Task WriteByIdAsync(string material, int lineToEdit)
-        {
-            return LineChangerAsync(material, Path, lineToEdit);
+            return LineChangerAsync(material);
         }
 
 
         public Task WriteDeleteByIdAsync(int lineToDelete)
         {
-            return LineRemoverAsync(Path, lineToDelete);
+            return LineRemoverAsync(MaterialPath, lineToDelete);
         }
 
 
@@ -62,19 +88,24 @@ namespace MaterialManagement.Models
         }
 
 
-        private static Task LineChangerAsync(string newText, string fileName, int lineToEdit)
+        private Task LineChangerAsync(Material newText)
         {
-            var arrLine = File.ReadAllLines(fileName);
-            arrLine[lineToEdit] = newText;
-            File.WriteAllLines(fileName, arrLine);
+            var mats = ReadAllAsync().Result;
+            mats.First(m => m.Id == newText.Id).Count = newText.Count;
+            mats.First(m => m.Id == newText.Id).Name = newText.Name;
+            mats.First(m => m.Id == newText.Id).MinimalCount = newText.MinimalCount;
+            foreach (var material in mats)
+            {
+                WriteAsync(material);
+            }
+
             return Task.CompletedTask;
         }
     }
 
     public interface ICsvReadWriter
     {
-        Task WriteAsync(string line);
-        Task<List<string>> ReadAllAsync();
-
+        Task WriteAsync(Material line);
+        Task<List<Material>> ReadAllAsync();
     }
 }

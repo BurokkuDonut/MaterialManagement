@@ -20,6 +20,7 @@ namespace MaterialManagement.ViewModels
             _eventAggregator = eventAggregator;
             _dataProvider = new DataProvider();
             Materials = _dataProvider.GetMaterials();
+            SelectedMaterialIndex = -1;
         }
 
         public List<Material> Materials
@@ -75,6 +76,7 @@ namespace MaterialManagement.ViewModels
 
         private void FillSettings(int selectedMaterial)
         {
+            if (selectedMaterial < 0) return;
             var materialToFill = Materials[selectedMaterial];
             Name = materialToFill.Name;
             Amount = materialToFill.Count.ToString();
@@ -84,23 +86,37 @@ namespace MaterialManagement.ViewModels
         public void AddToCount()
         {
             Materials[_selectedMaterialIndex].Count += 1;
-            NotifyOfPropertyChange(nameof(Amount));
+            NotifyOfPropertyChange(() => Amount);
         }
 
         public void RemoveFromCount()
         {
             Materials[_selectedMaterialIndex].Count -= 1;
-            NotifyOfPropertyChange(nameof(Amount));
+            NotifyOfPropertyChange(() => Amount);
         }
-    }
 
-    public class NavigationEvent
-    {
-        public NavigationEvent(Type navigateTo)
+        public void Cancel()
         {
-            NavigateTo = navigateTo.Name;
+            SelectedMaterialIndex = -1;
+            Name = String.Empty;
+            Amount = String.Empty;
+            MinimalAmount = String.Empty;
         }
 
-        public string NavigateTo { get; set; }
+        public void Add()
+        {
+            if (SelectedMaterialIndex < 0)
+            {
+                _dataProvider.AddMaterial(
+                    new Material(Name, Convert.ToInt32(Amount), Convert.ToInt32(MinimalAmount), 0));
+            }
+            else
+            {
+                Materials[SelectedMaterialIndex].Count = int.Parse(Amount);
+                Materials[SelectedMaterialIndex].Name = Name;
+                Materials[SelectedMaterialIndex].MinimalCount = int.Parse(MinimalAmount);
+                _dataProvider.EditMaterial(Materials[SelectedMaterialIndex]);
+            }
+        }
     }
 }
