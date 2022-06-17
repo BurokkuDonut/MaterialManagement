@@ -7,8 +7,9 @@ namespace MaterialManagement
 {
     public class Material : INotifyPropertyChanged
     {
-        private static int nextId;
+        public static int nextId;
         private int _count;
+        private string _name;
 
         public Material()
         {
@@ -24,7 +25,17 @@ namespace MaterialManagement
         }
 
         [Name("Id")] public int Id { get; set; }
-        [Name("Name")] public string Name { get; set; }
+
+        [Name("Name")]
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value; 
+                OnPropertyChanged(nameof(Name));
+            }
+        }
 
         [Name("MinimalCount")] public int MinimalCount { get; set; }
 

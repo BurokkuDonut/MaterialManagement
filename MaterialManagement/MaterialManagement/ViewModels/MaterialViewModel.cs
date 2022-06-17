@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using MaterialManagement.Models;
@@ -22,6 +23,7 @@ namespace MaterialManagement.ViewModels
             _eventAggregator = eventAggregator;
             _dataProvider = new DataProvider();
             Materials = new ObservableCollection<Material>(_dataProvider.GetMaterials());
+            Material.nextId = Materials.Select(x => x.Id).Max();;
             SelectedMaterialIndex = -1;
         }
 
@@ -121,15 +123,17 @@ namespace MaterialManagement.ViewModels
         {
             if (SelectedMaterialIndex < 0)
             {
-                Task.Run(() => _dataProvider.AddMaterial(
-                    new Material(Name, Convert.ToInt32(Amount), Convert.ToInt32(MinimalAmount), 0)));
+                _dataProvider.AddMaterial(
+                    new Material(Name, Convert.ToInt32(Amount), Convert.ToInt32(MinimalAmount), 0));
+                Materials = new ObservableCollection<Material>(_dataProvider.GetMaterials());
+                NotifyOfPropertyChange(nameof(Materials));
             }
             else
             {
                 Materials[SelectedMaterialIndex].Count = int.Parse(Amount);
                 Materials[SelectedMaterialIndex].Name = Name;
                 Materials[SelectedMaterialIndex].MinimalCount = int.Parse(MinimalAmount);
-                Task.Run(() => _dataProvider.EditMaterial(Materials[SelectedMaterialIndex]));
+                _dataProvider.EditMaterial(Materials[SelectedMaterialIndex]);
             }
         }
     }
