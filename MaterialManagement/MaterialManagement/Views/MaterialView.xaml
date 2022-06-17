@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cm="http://caliburnmicro.com"
              xmlns:viewModels="clr-namespace:MaterialManagement.ViewModels"
              mc:Ignorable="d"
              Height="550" Width="800"
@@ -118,6 +119,13 @@
                         <GridViewColumn Header="Material" DisplayMemberBinding="{Binding Name}" />
                         <GridViewColumn Header="Menge" DisplayMemberBinding="{Binding Count}" />
                         <GridViewColumn Header="Mindestbestand" DisplayMemberBinding="{Binding MinimalCount}" />
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <ItemContainerTemplate>
+                                    <Button cm:Message.Attach="[Action Delete($this)]" HorizontalAlignment="Right">X</Button>
+                                </ItemContainerTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

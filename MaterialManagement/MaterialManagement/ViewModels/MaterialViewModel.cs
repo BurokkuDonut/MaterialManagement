@@ -140,6 +140,7 @@ namespace MaterialManagement.ViewModels
         public void Delete(Material material)
         {
             Materials.Remove(material);
+            _dataProvider.DeleteMaterial(material.Id);
             NotifyOfPropertyChange(null);
         }
     }
