@@ -7,7 +7,7 @@ namespace MaterialManagement.Models
 {
     public class DataProvider : IDataProvider
     {
-        private readonly CsvReadWriter _csvReadWriter;
+        private readonly ICsvReadWriter _csvReadWriter;
 
         public DataProvider()
         {
