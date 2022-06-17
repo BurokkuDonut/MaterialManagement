@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using CsvHelper.Configuration.Attributes;
 
-namespace MaterialManagement
+namespace MaterialManagement.Models
 {
     public class Material : INotifyPropertyChanged
     {
