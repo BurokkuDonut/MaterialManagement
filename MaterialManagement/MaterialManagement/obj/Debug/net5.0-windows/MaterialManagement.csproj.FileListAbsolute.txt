@@ -258,3 +258,4 @@ C:\Users\vmadmin\Source\Repos\MaterialManagement\MaterialManagement\MaterialMana
 C:\Users\vmadmin\Source\Repos\MaterialManagement\MaterialManagement\MaterialManagement\obj\Debug\net5.0-windows\ref\MaterialManagement.dll
 C:\Users\vmadmin\Source\Repos\MaterialManagement\MaterialManagement\MaterialManagement\obj\Debug\net5.0-windows\MaterialManagement.pdb
 C:\Users\vmadmin\source\repos\MaterialManagement\MaterialManagement\MaterialManagement\obj\Debug\net5.0-windows\MaterialManagement.genruntimeconfig.cache
+C:\Users\vmadmin\Source\Repos\MaterialManagement\MaterialManagement\MaterialManagement\obj\Debug\net5.0-windows\MaterialManagement_Content.g.cs

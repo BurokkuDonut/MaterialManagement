@@ -5,7 +5,12 @@
         <TargetFramework>net5.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <ApplicationIcon>20999034511578463657-128.ico</ApplicationIcon>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Content Include="20999034511578463657-128.ico" />
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Caliburn.Micro" Version="4.0.173" />
