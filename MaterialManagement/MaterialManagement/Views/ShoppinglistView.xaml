@@ -1,35 +1,35 @@
 ﻿<UserControl x:Class="MaterialManagement.Views.ShoppinglistView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:viewModels="clr-namespace:MaterialManagement.ViewModels"
-        xmlns:cm="http://caliburnmicro.com"
-        mc:Ignorable="d"
-        Height="550" Width="800"
-        d:DataContext="{d:DesignInstance viewModels:ShoppinglistViewModel}">
-    
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:MaterialManagement.ViewModels"
+             xmlns:cm="http://caliburnmicro.com"
+             mc:Ignorable="d"
+             Height="550" Width="800"
+             d:DataContext="{d:DesignInstance viewModels:ShoppinglistViewModel}">
+
     <UserControl.Resources>
         <Style x:Key="ButtonWithRoundedCorner" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#736D6C"/>
+            <Setter Property="Background" Value="#736D6C" />
             <Setter Property="Foreground" Value="White"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" CornerRadius="15">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#534F4E"/>
+                    <Setter Property="Background" Value="#534F4E" />
                 </Trigger>
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid Margin="30,30,30,50">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -41,7 +41,9 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" FontSize="25" Margin="10" Content="Materialmanagement"></Label>
-        <Button x:Name="NavigateToMaterialManagementView" Style="{StaticResource ButtonWithRoundedCorner}" Grid.Row="0" Grid.Column="1" Height="30" Width="120" HorizontalAlignment="Right" Margin="40,0" Content="Material"></Button>
+        <Button x:Name="NavigateToMaterialManagementView" Style="{StaticResource ButtonWithRoundedCorner}" Grid.Row="0"
+                Grid.Column="1" Height="30" Width="120" HorizontalAlignment="Right" Margin="40,0" Content="Material">
+        </Button>
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -49,7 +51,8 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
                 <Label Content="Material hinzufügen:" Margin="0,0,10,0"></Label>
-                <TextBox x:Name="ShoppingListTextBox" Width="300" Height="25" VerticalContentAlignment="Center" cm:Message.Attach="[Event KeyDown] = [Action AddToShoppingList($executionContext)]">
+                <TextBox x:Name="ShoppingListTextBox" Width="300" Height="25" VerticalContentAlignment="Center"
+                         cm:Message.Attach="[Event KeyDown] = [Action AddToShoppingList($executionContext)]">
                 </TextBox>
             </StackPanel>
             <Grid Grid.Row="1" Margin="30,10">
@@ -66,21 +69,43 @@
                             <GridViewColumn Header="Hinzufügen">
                                 <GridViewColumn.CellTemplate>
                                     <ItemContainerTemplate>
-                                        <Button cm:Message.Attach="[Action Add($this)]">+</Button>
+                                        <Button cm:Message.Attach="[Action Add($this)]" BorderBrush="Transparent"
+                                                Background="Transparent">
+                                            <Path Height="10" Width="10"
+                                                  Data="F1 M52,52z M0,0z M26,0C11.664,0 0,11.663 0,26 0,40.337 11.664,52 26,52 40.336,52 52,40.337 52,26 52,11.663 40.336,0 26,0z M38.5,28L28,28 28,39C28,40.104 27.104,41 26,41 24.896,41 24,40.104 24,39L24,28 13.5,28C12.396,28 11.5,27.104 11.5,26 11.5,24.896 12.396,24 13.5,24L24,24 24,14C24,12.896 24.896,12 26,12 27.104,12 28,12.896 28,14L28,24 38.5,24C39.604,24 40.5,24.896 40.5,26 40.5,27.104 39.604,28 38.5,28z"
+                                                  Fill="#000000"
+                                                  Stretch="Fill">
+                                            </Path>
+                                        </Button>
                                     </ItemContainerTemplate>
                                 </GridViewColumn.CellTemplate>
-                            </GridViewColumn>                        
+                            </GridViewColumn>
                             <GridViewColumn Header="Entfernen">
                                 <GridViewColumn.CellTemplate>
                                     <ItemContainerTemplate>
-                                        <Button cm:Message.Attach="[Action Remove($this)]">-</Button>
+                                        <Button cm:Message.Attach="[Action Remove($this)]" BorderBrush="Transparent"
+                                                Background="Transparent">
+                                            <Path Height="10" Width="10"
+                                                  Data="F1 M310.285,310.285z M0,0z M155.143,0.001C69.597,0.001 0,69.597 0,155.143 0,240.688 69.597,310.285 155.143,310.285 240.689,310.285 310.286,240.688 310.286,155.143 310.285,69.597 240.689,0.001 155.143,0.001z M244.143,171.498C244.143,175.909,240.554,179.498,236.143,179.498L73.143,179.498C68.732,179.498,65.143,175.909,65.143,171.498L65.143,139.498C65.143,135.087,68.732,131.498,73.143,131.498L236.143,131.498C240.554,131.498,244.143,135.087,244.143,139.498L244.143,171.498z"
+                                                  Fill="#000000"
+                                                  Stretch="Fill">
+                                            </Path>
+                                        </Button>
                                     </ItemContainerTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn>
                                 <GridViewColumn.CellTemplate>
                                     <ItemContainerTemplate>
-                                        <Button cm:Message.Attach="[Action Delete($this)]" HorizontalAlignment="Right">X</Button>
+                                        <Button cm:Message.Attach="[Action Delete($this)]" HorizontalAlignment="Right"
+                                                BorderBrush="Transparent" Background="Transparent">
+                                            <Path
+                                                Height="10" Width="10"
+                                                Data="F1 M16,16z M0,0z M1.293,1.293A1,1,0,0,1,2.707,1.293L8,6.586 13.293,1.293A1,1,0,1,1,14.707,2.707L9.414,8 14.707,13.293A1,1,0,0,1,13.293,14.707L8,9.414 2.707,14.707A1,1,0,0,1,1.293,13.293L6.586,8 1.293,2.707A1,1,0,0,1,1.293,1.293z"
+                                                Fill="#000000"
+                                                Stretch="Fill">
+                                            </Path>
+                                        </Button>
                                     </ItemContainerTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

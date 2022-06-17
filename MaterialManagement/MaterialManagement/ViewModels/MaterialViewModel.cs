@@ -23,7 +23,7 @@ namespace MaterialManagement.ViewModels
             _eventAggregator = eventAggregator;
             _dataProvider = new DataProvider();
             Materials = new ObservableCollection<Material>(_dataProvider.GetMaterials());
-            Material.nextId = Materials.Select(x => x.Id).Max();;
+            Material.nextId = Materials.Count == 0 ? 0 : Materials.Select(x => x.Id).Max();
             SelectedMaterialIndex = -1;
         }
 
@@ -135,6 +135,7 @@ namespace MaterialManagement.ViewModels
                 Materials[SelectedMaterialIndex].MinimalCount = int.Parse(MinimalAmount);
                 _dataProvider.EditMaterial(Materials[SelectedMaterialIndex]);
             }
+            Cancel();
         }
 
         public void Delete(Material material)

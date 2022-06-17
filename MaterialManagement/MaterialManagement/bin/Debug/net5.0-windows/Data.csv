@@ -1,4 +1,4 @@
 Id,Name,MinimalCount,ToBeOrdered,Count
-2,c,4,0,3
-2,d,4,0,4
-3,d,4,0,4
+1,a,2,0,1
+2,b,1,0,2
+3,c,3,0,1

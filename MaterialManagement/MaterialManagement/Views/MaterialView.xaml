@@ -122,7 +122,13 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <ItemContainerTemplate>
-                                    <Button cm:Message.Attach="[Action Delete($this)]" HorizontalAlignment="Right">X</Button>
+                                    <Button cm:Message.Attach="[Action Delete($this)]" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent">
+                                        <Path Height="10" Width="10"
+                                              Data="F1 M72.434,72.44z M0,0z M36.22,0C16.212,0 0,16.216 0,36.227 0,56.226 16.212,72.441 36.22,72.441 56.231,72.441 72.434,56.226 72.434,36.227 72.434,16.215 56.231,0 36.22,0z M52.058,46.82C53.437,48.244 53.011,50.898 51.099,52.752 49.188,54.606 46.522,54.961 45.14,53.537L36.113,44.242 26.815,53.269C25.394,54.648 22.74,54.216 20.886,52.308 19.032,50.4 18.68,47.734 20.101,46.352L29.399,37.325 20.372,28.027C18.993,26.606 19.426,23.949 21.334,22.095 23.239,20.244 25.911,19.891 27.287,21.31L36.314,30.607 45.615,21.584C47.039,20.202 49.693,20.634 51.544,22.542 53.401,24.45 53.75,27.119 52.329,28.501L43.034,37.525 52.058,46.82z"
+                                              Fill="#000000"
+                                              Stretch="Fill">
+                                        </Path>
+                                    </Button>
                                 </ItemContainerTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

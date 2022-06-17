@@ -2,7 +2,7 @@
 
 namespace MaterialManagement.Models
 {
-    public class MaterialMap : ClassMap<Material>
+    public sealed class MaterialMap : ClassMap<Material>
     {
         public MaterialMap()
         {

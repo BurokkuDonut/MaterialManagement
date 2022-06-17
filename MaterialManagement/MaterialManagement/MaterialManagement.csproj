@@ -5,16 +5,16 @@
         <TargetFramework>net5.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
-        <ApplicationIcon>20999034511578463657-128.ico</ApplicationIcon>
+        <ApplicationIcon>Resources/20999034511578463657-128.ico</ApplicationIcon>
     </PropertyGroup>
-
-    <ItemGroup>
-      <Content Include="20999034511578463657-128.ico" />
-    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Caliburn.Micro" Version="4.0.173" />
       <PackageReference Include="CsvHelper" Version="27.2.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Resources\20999034511578463657-128.ico" />
     </ItemGroup>
 
 </Project>
