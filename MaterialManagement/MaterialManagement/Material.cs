@@ -63,6 +63,13 @@ namespace MaterialManagement
             }
         }
 
+                _count = value;
+                Task.Run(() => OnPropertyChanged(nameof(Count)));
+            }
+        }
+
+        [Name("MinimalCount")] public int MinimalCount { get; set; }
+        [Name("ToBeOrdered")] public int ToBeOrdered { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

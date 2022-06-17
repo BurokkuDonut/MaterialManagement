@@ -136,5 +136,11 @@ namespace MaterialManagement.ViewModels
                 _dataProvider.EditMaterial(Materials[SelectedMaterialIndex]);
             }
         }
+
+        public void Delete(Material material)
+        {
+            Materials.Remove(material);
+            NotifyOfPropertyChange(null);
+        }
     }
 }
