@@ -10,6 +10,7 @@ namespace MaterialManagement
         public static int nextId;
         private int _count;
         private string _name;
+        private int _toBeOrdered;
 
         public Material()
         {
@@ -32,7 +33,7 @@ namespace MaterialManagement
             get => _name;
             set
             {
-                _name = value; 
+                _name = value;
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -42,15 +43,14 @@ namespace MaterialManagement
         [Name("ToBeOrdered")]
         public int ToBeOrdered
         {
-            get => toBeOrdered;
+            get => _toBeOrdered;
             set
             {
-                toBeOrdered = value;
+                _toBeOrdered = value;
                 OnPropertyChanged(nameof(ToBeOrdered));
             }
         }
 
-        [Name("ToBeOrdered")] private int toBeOrdered { get; set; }
 
         [Name("Count")]
         public int Count
@@ -63,13 +63,6 @@ namespace MaterialManagement
             }
         }
 
-                _count = value;
-                Task.Run(() => OnPropertyChanged(nameof(Count)));
-            }
-        }
-
-        [Name("MinimalCount")] public int MinimalCount { get; set; }
-        [Name("ToBeOrdered")] public int ToBeOrdered { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
