@@ -8,5 +8,6 @@ namespace MaterialManagement.Models
         List<Material> GetMaterials();
         Task AddMaterial(Material material);
         Task EditMaterial(Material material);
+        Task DeleteMaterial(int id);
     }
 }

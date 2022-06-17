@@ -33,5 +33,10 @@ namespace MaterialManagement.Models
                 material.ToBeOrdered);
             return _csvReadWriter.WriteByIdAsync(material);
         }
+
+        public Task DeleteMaterial(int id)
+        {
+            return _csvReadWriter.DeleteByIdAsync(id);
+        }
     }
 }

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CsvHelper;
 using CsvHelper.Configuration;
-using MaterialManagement.ViewModels;
 
 namespace MaterialManagement.Models
 {
@@ -76,20 +75,17 @@ namespace MaterialManagement.Models
         }
 
 
-        public Task WriteDeleteByIdAsync(int lineToDelete)
+        public async Task DeleteByIdAsync(int id)
         {
-            return LineRemoverAsync(MaterialPath, lineToDelete);
+            var materials = ReadAllAsync().Result.Where(x => x.Id != id);
+
+            CreateFileIfNotExisting(true);
+
+            foreach (var material in materials)
+            {
+                await WriteAsync(material);
+            }
         }
-
-
-        private static Task LineRemoverAsync(string fileName, int lineToDelete)
-        {
-            var arrLine = File.ReadAllLines(fileName);
-            var arrLineEdited = arrLine.Where(line => line != arrLine[lineToDelete]);
-            File.WriteAllLines(fileName, arrLineEdited);
-            return Task.CompletedTask;
-        }
-
 
         private Task LineChangerAsync(Material newText)
         {
@@ -113,5 +109,9 @@ namespace MaterialManagement.Models
     {
         Task WriteAsync(Material line);
         Task<List<Material>> ReadAllAsync();
+
+        Task DeleteByIdAsync(int id);
+
+        Task WriteByIdAsync(Material material);
     }
 }
