@@ -48,5 +48,11 @@ namespace MaterialManagement.ViewModels
             NotifyOfPropertyChange(null);
         }
 
+        public void Delete(Material material)
+        {
+            Material.Remove(material);
+            NotifyOfPropertyChange(null);
+        }
+
     }
 }

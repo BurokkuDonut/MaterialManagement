@@ -28,7 +28,15 @@ namespace MaterialManagement
         [Name("Name")] public string Name { get; set; }
 
         [Name("Count")]
-        public int Count { get; set; }
+        public int Count
+        {
+            get => _count;
+            set
+            {
+                _count = value;
+                Task.Run(() => OnPropertyChanged(nameof(Count)));
+            }
+        }
         [Name("MinimalCount")]
         public int MinimalCount { get; set; }
         [Name("ToBeOrdered")]
@@ -40,24 +48,6 @@ namespace MaterialManagement
 
         private int toBeOrdered { get; set; }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public int Count
-        {
-            get => _count;
-            set
-            {
-                _count = value;
-                Task.Run(() => OnPropertyChanged(nameof(Count)));
-            }
-        }
-
-        [Name("MinimalCount")] public int MinimalCount { get; set; }
-        [Name("ToBeOrdered")] public int ToBeOrdered { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

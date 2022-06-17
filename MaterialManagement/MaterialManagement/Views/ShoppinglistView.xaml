@@ -77,6 +77,13 @@
                                     </ItemContainerTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <ItemContainerTemplate>
+                                        <Button cm:Message.Attach="[Action Delete($this)]" HorizontalAlignment="Right">X</Button>
+                                    </ItemContainerTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
