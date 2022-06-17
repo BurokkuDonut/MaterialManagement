@@ -34,20 +34,7 @@ namespace MaterialManagement.Models
 
         public Task<List<Material>> ReadAllAsync()
         {
-            if (!File.Exists(MaterialPath))
-            {
-                using (var stream = File.Open(MaterialPath, FileMode.Create))
-                {
-                    using (var writer = new StreamWriter(stream))
-                    {
-                        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-                        {
-                            csv.WriteHeader<Material>();
-                            csv.NextRecord();
-                        }
-                    }
-                }
-            }
+            CreateFileIfNotExisting();
 
             List<Material> materials;
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -64,6 +51,22 @@ namespace MaterialManagement.Models
             }
 
             return Task.FromResult(materials);
+        }
+
+        private void CreateFileIfNotExisting(bool exectue = false)
+        {
+            if (File.Exists(MaterialPath) && !exectue) return;
+            using (var stream = File.Open(MaterialPath, FileMode.Create))
+            {
+                using (var writer = new StreamWriter(stream))
+                {
+                    using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                    {
+                        csv.WriteHeader<Material>();
+                        csv.NextRecord();
+                    }
+                }
+            }
         }
 
 
@@ -94,6 +97,9 @@ namespace MaterialManagement.Models
             mats.First(m => m.Id == newText.Id).Count = newText.Count;
             mats.First(m => m.Id == newText.Id).Name = newText.Name;
             mats.First(m => m.Id == newText.Id).MinimalCount = newText.MinimalCount;
+
+            CreateFileIfNotExisting(true);
+
             foreach (var material in mats)
             {
                 WriteAsync(material);
