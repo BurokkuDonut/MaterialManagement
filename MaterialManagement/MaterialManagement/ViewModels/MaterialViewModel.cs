@@ -99,14 +99,14 @@ namespace MaterialManagement.ViewModels
 
         public void AddToMinimal()
         {
-            MinimalAmount = (Convert.ToInt32(Amount) + 1).ToString();
-            NotifyOfPropertyChange(() => Amount);
+            MinimalAmount = (Convert.ToInt32(MinimalAmount) + 1).ToString();
+            NotifyOfPropertyChange(() => MinimalAmount);
         }
 
         public void RemoveFromMinimal()
         {
-            MinimalAmount = (Convert.ToInt32(Amount) - 1).ToString();
-            NotifyOfPropertyChange(() => Amount);
+            MinimalAmount = (Convert.ToInt32(MinimalAmount) - 1).ToString();
+            NotifyOfPropertyChange(() => MinimalAmount);
         }
 
         public void Cancel()
